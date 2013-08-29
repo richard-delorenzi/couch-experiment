@@ -1,10 +1,10 @@
 {
   "env": {
     "default" : {
-      "db" : "http://admin:password@localhost:5984/sofa-couch"
+      "db" : "http://admin:password@localhost:5984/q-couch"
     },
     "staging": {
-      "db" : "http://admin:password@localhost:5984/sofa-staging"
+      "db" : "http://admin:password@localhost:5984/q-couch-staging"
     }
   }
 }

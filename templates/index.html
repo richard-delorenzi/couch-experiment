@@ -3,8 +3,6 @@
   <head>
     <title>{{ title }}</title>
     <link rel="stylesheet" href="../../style/screen.css" type="text/css"/>
-    <link rel="alternate" type="application/atom+xml" 
-      title="Atom Feed" href="{{ feedPath }}"/>
   </head>
   <body>
     {{>header}}
@@ -12,22 +10,21 @@
     <div id="content">
       <h1>Recently...</h1>
       <ul id="posts">
-        {{#posts}}
+        {{#rides}}
           <li>
             <h3><a href="{{ link }}">{{ title }}</a></h3>
-            {{#has_tags}}
+            {{#has_description}}
               <div class="tags">
-                {{#tags}}
-                  <a href="{{link}}">{{tag}}</a>
-                {{/tags}}
+                {{#description}}
+                  <a href="{{link}}">{{description}}</a>
+                {{/description}}
               </div>
-            {{/has_tags}}
-            <div class="by">
-              <span class="date">{{ date }}</span> 
-              by {{author}}
+            {{/has_description}}
+            <div class="wait">
+              <span>{{ wait_time_min }}</span> 
             </div>
           </li>
-        {{/posts}}
+        {{/rides}}
     </ul>
     <div class="paginate">
       <a href="{{ older }}">older posts</a>
