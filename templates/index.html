@@ -8,30 +8,29 @@
     {{>header}}
     <div id="tagcloud"></div>
     <div id="content">
-      <h1>Recently...</h1>
-      <ul id="posts">
+      <h1>Rides</h1>
+      <ul id="rides">
         {{#rides}}
           <li>
-            <h3><a href="{{ link }}">{{ title }}</a></h3>
+            <h3>{{ name }}</h3>
             {{#has_description}}
-              <div class="tags">
+              <div class="ride">
                 {{#description}}
-                  <a href="{{link}}">{{description}}</a>
+                  {{description}}
                 {{/description}}
               </div>
             {{/has_description}}
+
+	    {{#has_wait_time_min}}
             <div class="wait">
-              <span>{{ wait_time_min }}</span> 
+              {{#wait_time_min}}
+                <span>wait time is {{ wait_time_min }}</span> 
+	      {{/wait_time_min}}
             </div>
+	    {{/has_wait_time_min}}
           </li>
         {{/rides}}
     </ul>
-    <div class="paginate">
-      <a href="{{ older }}">older posts</a>
-      <a href="{{5}}">5</a>
-      <a href="{{10}}">10</a>
-      <a href="{{25}}">25</a>      
-    </div>
   </div>
 </body>
 {{>scripts}}

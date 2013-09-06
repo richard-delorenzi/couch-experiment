@@ -27,20 +27,22 @@ function(head, req) {
 	    design : req.path[2],
 	    newPostPath : path.show("edit"),
 	    assets : path.asset(),
-	    posts : List.withRows(function(row) {
-		var post = row.value;
+	    rides : List.withRows(function(row) {
+		var ride = row.value;
 		key = row.key;
 		return {
-		    title : ride.title,
-		    description : ride.description
+		    has_wait_time_min : ride.wait_time_min ? true : false,
+                    wait_time_min: ride.wait_time_min,
+
+		    has_description: ride.description ? true : false,
+		    description: ride.description,
+
+		    name : ride.name
 		};
 	    }),
 	    older : function() {
 		return path.older(key);
-	    },
-	    "5" : path.limit(5),
-	    "10" : path.limit(10),
-	    "25" : path.limit(25)
+	    }
 	};
 	return Mustache.to_html(ddoc.templates.index, stash, ddoc.templates.partials, List.send);
     });
