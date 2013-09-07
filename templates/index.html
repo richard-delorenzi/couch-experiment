@@ -15,9 +15,13 @@
             <h3>{{ name }}</h3>
             {{#has_description}}
               <div class="ride">
+		<ul>
                 {{#description}}
-                  {{description}}
+                  <li>{{description}}</li>
                 {{/description}}
+
+		<li>**{{description}}</li>
+		</ul>
               </div>
             {{/has_description}}
 
