@@ -2,4 +2,4 @@
 
 unset http_proxy
 unset https_proxy
-sudo pip install --upgrade couchapp
+sudo pip install --user --upgrade couchapp
