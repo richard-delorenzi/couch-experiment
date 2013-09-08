@@ -1,0 +1,29 @@
+<html>
+<head>
+<script src="mustache.js"></script>
+<script>
+<!-- ################################################################ -->
+
+
+var data = {
+    employees: [
+    {   firstName: "Christophe",
+        lastName: "Coenraets"},
+    {   firstName: "John",
+        lastName: "Smith"}
+    ]};
+var template = "Employees:<ul>{{#employees}}" +
+                            "<li>{{firstName}} {{lastName}}</li>" +
+                            "{{/employees}}</ul>";
+var html = Mustache.to_html(template, data);
+
+
+<!-- ################################################################ -->
+</script>
+</head>
+<body>
+<script>
+document.write(html);
+</script>
+</body>
+</html>
