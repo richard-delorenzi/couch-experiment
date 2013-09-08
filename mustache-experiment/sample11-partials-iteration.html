@@ -1,0 +1,35 @@
+<html>
+<head>
+<script src="mustache.js"></script>
+<script>
+<!-- ################################################################ -->
+
+
+var data = { depts: [
+    {   name: "Engineering",
+        employees: [
+            {firstName: "Christophe", lastName: "Coenraets"},
+            {firstName: "John", lastName: "Smith"}]
+    },
+    {   name: "Sales",
+        employees: [
+            {firstName: "Paula", lastName: "Taylor"},
+            {firstName: "Lisa", lastName: "Jones"}]
+    }]
+};
+ 
+var tpl = "{{#depts}}<h1>{{name}}</h1>" +
+          "<ul>{{#employees}}{{>employee}}{{/employees}}</ul>{{/depts}}";
+var partials = {employee: "<li>{{firstName}} {{lastName}}</li>"};
+var html = Mustache.to_html(tpl, data, partials);
+
+
+<!-- ################################################################ -->
+</script>
+</head>
+<body>
+<script>
+document.write(html);
+</script>
+</body>
+</html>
