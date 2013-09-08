@@ -31,7 +31,7 @@ function(head, req) {
 	};
 
 	return JSON.stringify(stash);
-	return Mustache.to_html(ddoc.templates.index, stash, ddoc.templates.partials, List.send);
+	return Mustache.to_html(ddoc.templates.index, stash, ddoc.templates.partials);
     });
 
     

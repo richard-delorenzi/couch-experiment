@@ -5,28 +5,25 @@
     <link rel="stylesheet" href="../../style/screen.css" type="text/css"/>
   </head>
   <body>
-    {{>header}}
-    <div id="tagcloud"></div>
+  
     <div id="content">
       <h1>Rides</h1>
       <ul id="rides">
         {{#rides}}
           <li>
-            <h3>{{ name }}</h3>
+            <h3>{{name}}</h3>
             {{#has_description}}
-              <div class="ride">
+              <div class="descriptions">
 		<ul>
                 {{#description}}
-                  <li>{{description}}</li>
+                  <li>{{.}}</li>
                 {{/description}}
-
-		<li>**{{description}}</li>
 		</ul>
               </div>
             {{/has_description}}
 
 	    {{#has_wait_time_min}}
-            <div class="wait">
+            <div class="wait_time">
               {{#wait_time_min}}
                 <span>wait time is {{ wait_time_min }}</span> 
 	      {{/wait_time_min}}
