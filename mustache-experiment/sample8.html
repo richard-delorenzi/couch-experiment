@@ -1,0 +1,28 @@
+<html>
+<head>
+<script src="mustache.js"></script>
+<script>
+<!-- ################################################################ -->
+
+
+var product = {
+    name: "FooBar",
+    price: 100,
+    salesTax: 0.05,
+    totalPrice: function() {
+        return this.price  * (this.salesTax+1);
+    }
+};
+var template = "<p>Product Name: {{name}}</p>Price: {{totalPrice}}";
+var html = Mustache.to_html(template, product);
+
+
+<!-- ################################################################ -->
+</script>
+</head>
+<body>
+<script>
+document.write(html);
+</script>
+</body>
+</html>

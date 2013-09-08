@@ -1,0 +1,30 @@
+<html>
+<head>
+<script src="mustache.js"></script>
+<script>
+<!-- ################################################################ -->
+
+
+var person = {
+    firstName: "John",
+    lastName: "Smith",
+    blogURL: "http://johnsmith.com",
+    manager : {
+        firstName: "Lisa",
+        lastName: "Jones"
+    }
+};
+var tpl = "<h1>{{firstName}} {{lastName}}</h1><p>{{blogURL}}</p>" +
+          "{{#manager}}Manager: {{firstName}} {{lastName}}{{/manager}}";
+var html = Mustache.to_html(tpl, person);
+
+
+<!-- ################################################################ -->
+</script>
+</head>
+<body>
+<script>
+document.write(html);
+</script>
+</body>
+</html>
