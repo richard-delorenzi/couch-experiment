@@ -15,18 +15,6 @@ function(head, req) {
 	var key = "";
 	// render the html head using a template
 	var stash = {
-	    header : {
-		index : indexPath,
-		blogName : "",
-		feedPath : "",
-		commentsFeed : ""
-
-	    },
-	    scripts : {},
-	    db : req.path[0],
-	    design : req.path[2],
-	    newPostPath : path.show("edit"),
-	    assets : path.asset(),
 	    rides : List.withRows(function(row) {
 		var ride = row.value;
 		key = row.key;
@@ -39,11 +27,10 @@ function(head, req) {
 
 		    name : ride.name
 		};
-	    }),
-	    older : function() {
-		return path.older(key);
-	    }
+	    })
 	};
+
+	return JSON.stringify(stash);
 	return Mustache.to_html(ddoc.templates.index, stash, ddoc.templates.partials, List.send);
     });
 
