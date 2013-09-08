@@ -11,7 +11,8 @@ function(head, req) {
     // The provides function serves the format the client requests.
     // The first matching format is sent, so reordering functions changes 
     // thier priority. In this case HTML is the preferred format, so it comes first.
-    provides("html", function() {
+    function stash()
+    {
 	var key = "";
 	// render the html head using a template
 	var stash = {
@@ -29,9 +30,15 @@ function(head, req) {
 		};
 	    })
 	};
+	return stash;
+    }
 
-	return JSON.stringify(stash);
-	return Mustache.to_html(ddoc.templates.index, stash, ddoc.templates.partials);
+    provides("html", function() {
+	return Mustache.to_html(ddoc.templates.index, stash(), ddoc.templates.partials);
+    });
+
+    provides("json", function() {
+	return JSON.stringify(stash());
     });
 
     
