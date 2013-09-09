@@ -35,7 +35,7 @@ function(head, req) {
 			
 			name : ride.name
 		    };
-		    return ride_stash;
+		    return addHas(ride_stash);
 		})
 	};
 	return stash;
