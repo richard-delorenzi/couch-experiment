@@ -23,6 +23,11 @@ function(head, req) {
 	return Result;
     }
 
+    function listify(i)
+    {
+	return i;
+    }
+
     function stash()
     {
 	var key = "";
@@ -37,7 +42,7 @@ function(head, req) {
 			wait_time_min: ride.wait_time_min,
 			
 			//has_description: ride.description ? true : false,
-			description: ride.description,
+			description: listify(ride.description),
 			
 			name : ride.name
 		    };
