@@ -18,7 +18,7 @@ function(head, req) {
 	for ( var i in stash)
 	{
 	    Result[i] = stash[i];
-	    Result["has_"+i] = stash[i] ?true:false;
+	    Result["has_"+i] = (stash[i]===null)?false:true;
 	}
 	return Result;
     }
