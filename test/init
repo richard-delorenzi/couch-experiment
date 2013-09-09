@@ -1,0 +1,52 @@
+#!/bin/bash
+
+db_url="http://admin:password@127.0.0.1:5984/q-couch"
+
+curl -X DELETE "$db_url"
+
+curl -X PUT "$db_url"
+
+curl -X PUT "$db_url/059312a0bee28c720b5f7acf9000150d" -d '{
+   "type": "ride",
+   "name": "base2-test",
+   "description": "hold tight",
+   "wait_time_min": 5
+}'
+
+curl -X PUT "$db_url/059312a0bee28c720b5f7acf90002455" -d '{
+   "type": "ride",
+   "name": "list-test",
+   "wait_time_min": 30,
+   "description": [
+       "it is wet",
+       "lots of water",
+       "and fast"
+   ]
+}'
+
+curl -X PUT "$db_url/059312a0bee28c720b5f7acf9000481f" -d '{
+   "type": "ride",
+   "name": "base-test",
+   "wait_time_min": 2,
+   "description": "hello world"
+}'
+
+curl -X PUT "$db_url/6773283fce5edf3c82d6ae90880007d4" -d '{
+   "type": "ride",
+   "name": "true-test",
+   "wait_time_min": 2,
+   "description": true
+}'
+
+curl -X PUT "$db_url/6773283fce5edf3c82d6ae9088001420" -d '{
+   "type": "ride",
+   "name": "false-test",
+   "wait_time_min": 2,
+   "description": false
+}'
+
+
+
+
+
+
