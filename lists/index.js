@@ -14,7 +14,13 @@ function(head, req) {
 
     function addHas(stash)
     {
-	return stash;
+	var Result=new Object();
+	for ( var i in stash)
+	{
+	    Result[i] = stash[i];
+	    Result["has_"+i] = stash[i] ?true:false;
+	}
+	return Result;
     }
 
     function stash()
@@ -27,10 +33,10 @@ function(head, req) {
 		    var ride = row.value;
 		    key = row.key;
 		    var ride_stash = {
-			has_wait_time_min : ride.wait_time_min ? true : false,
+			//has_wait_time_min : ride.wait_time_min ? true : false,
 			wait_time_min: ride.wait_time_min,
 			
-			has_description: ride.description ? true : false,
+			//has_description: ride.description ? true : false,
 			description: ride.description,
 			
 			name : ride.name
