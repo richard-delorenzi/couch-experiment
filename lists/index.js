@@ -25,7 +25,18 @@ function(head, req) {
 
     function listify(i)
     {
-	return i;
+	if ( typeof i == "undefined" ) {
+	    return new Array();
+	}
+	else if (typeof i == "boolean") {
+	    return i?["true"]:["false"];
+	}
+	else if (Array.isArray(i)) {
+	    return i;
+	}
+	else {
+	    return [i]
+	}
     }
 
     function stash()
