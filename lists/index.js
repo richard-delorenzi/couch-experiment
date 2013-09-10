@@ -18,7 +18,8 @@ function(head, req) {
 	for ( var i in stash)
 	{
 	    Result[i] = stash[i];
-	    Result["has_"+i] = (stash[i]===null)?false:true;
+	    Result["has_"+i] = typeof i;
+		//(typeof i == "undefined" ||stash[i]===null)?false:true;
 	}
 	return Result;
     }
@@ -26,7 +27,7 @@ function(head, req) {
     function listify(i)
     {
 	if ( typeof i == "undefined" ) {
-	    return new Array();
+	    return null;
 	}
 	else if (typeof i == "boolean") {
 	    return i?["true"]:["false"];

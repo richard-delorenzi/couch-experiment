@@ -9,7 +9,7 @@ curl -X PUT "$db_url"
 curl -X PUT "$db_url/059312a0bee28c720b5f7acf9000150d" -d '{
    "type": "ride",
    "name": "base2-test",
-   "description": "hold tight",
+   "description": "simple discription",
    "wait_time_min": 5
 }'
 
@@ -18,9 +18,9 @@ curl -X PUT "$db_url/059312a0bee28c720b5f7acf90002455" -d '{
    "name": "list-test",
    "wait_time_min": 30,
    "description": [
-       "it is wet",
-       "lots of water",
-       "and fast"
+       "A list",
+       "of",
+       "descriptions"
    ]
 }'
 
@@ -45,11 +45,19 @@ curl -X PUT "$db_url/6773283fce5edf3c82d6ae9088001420" -d '{
    "description": false
 }'
 
+curl -X PUT "$db_url/0f1e21fda1ad83989d3364b4d100ecaa" -d '{
+   "type": "ride",
+   "name": "no description",
+   "wait_time_min": 2
+}'
+
 curl -X PUT "$db_url/0f1e21fda1ad83989d3364b4d100cfe9" -d '{
    "type": "reservation",
    "attraction_type" : "ride",
    "attraction_id" : "6773283fce5edf3c82d6ae90880007d4" 
 }'
+
+couchapp push
 
 
 
