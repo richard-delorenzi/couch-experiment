@@ -2,58 +2,63 @@
 <html>
   <head>
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="../../style/screen.css" type="text/css"/>
   </head>
   <body>
-  
+    
     <div id="content">
       <h1>Rides</h1>
       <ul id="rides">
         {{#rides}}
-          <li>
-            <h3>{{name}}</h3>
-            {{#ifdef_description}}
-              <div class="descriptions">
-		<ul>
-                {{#description}}
-                  <li>{{.}}</li>
-                {{/description}}
-		</ul>
-              </div>
-            {{/ifdef_description}}
 
-	    {{#ifdef_wait_time_min}}
-            <div class="wait_time">
-              {{#wait_time_min}}
-                <span>wait time is {{ wait_time_min }}</span> 
-	      {{/wait_time_min}}
-            </div>
-	    {{/ifdef_wait_time_min}}
+	  {{#name}}{{!test is real record, not artefact of processing (false)}}
+            <li>
 
-	    {{#ifdef_has_reservation}}
-	      <div class="reserved state">
-		<span>
-		{{#has_reservation}}
-		  resurved
-		{{/has_reservation}}
-		{{^has_reservation}}
-		  no resurvation
-		{{/has_reservation}}
-		</span>
-              </div>
-	    {{/ifdef_has_reservation}}
-          </li>
+	      <h3>{{name}}</h3>
+
+              {{#ifdef_description}}
+                <div class="descriptions">
+		  descriptions
+		  <ul>
+                    {{#description}}
+                      <li>{{.}}</li>
+                    {{/description}}
+		  </ul>
+		</div>
+              {{/ifdef_description}}
+
+	      {{#ifdef_wait_time_min}}
+		<div class="wait_time">
+		  {{#wait_time_min}}
+                    <span>wait time is {{ wait_time_min }} minutes</span> 
+		  {{/wait_time_min}}
+		</div>
+              {{/ifdef_wait_time_min}}
+	      {{#ifdef_entry_time}}
+		<div class="entry_time">
+		  {{#entry_time}}
+                    <span>entry time is {{ entry_time }}</span> 
+		  {{/entry_time}}
+		</div>
+              {{/ifdef_entry_time}}
+
+	      {{#ifdef_has_reservation}}
+		<div class="reserved state">
+		  <span>
+		    {{#has_reservation}}
+		      reserved 
+		    {{/has_reservation}}
+		    {{^has_reservation}}
+		      no reservation
+		    {{/has_reservation}}
+		  </span>
+		</div>
+	     {{/ifdef_has_reservation}}
+
+            </li>
+	  {{/name}}
         {{/rides}}
-    </ul>
-  </div>
-</body>
-{{>scripts}}
-<script type="text/javascript" charset="utf-8">
-  $.couch.app(function() {
-    $("#tagcloud").evently(this.ddoc.evently.tagcloud, this);
-  }, {
-    db : "{{db}}",
-    design : "{{design}}"
-  });
-</script>
+      </ul>
+    </div>
+  </body>
+  {{>scripts}}
 </html>
