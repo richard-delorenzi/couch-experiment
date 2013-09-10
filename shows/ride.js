@@ -4,8 +4,11 @@ function(doc, req) {
     
     var stash = {};
     if (doc) {
-	stash.doc = JSON.stringify(doc);
-	stash.name = doc.name;
+	//stash.doc = JSON.stringify(doc);
+	stash.name          = doc.name;
+	stash.description   = doc.description;
+	stash.wait_time_min = doc.wait_time_min;
+	//using a show may not be the way to go, we need to join on reservation
     } else {
 	stash.name ="ahhh";
     }
