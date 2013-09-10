@@ -29,6 +29,19 @@
 	      {{/wait_time_min}}
             </div>
 	    {{/has_wait_time_min}}
+
+	    {{#has_has_reservation}}
+	      <div class="reserved state">
+		<span>
+		{{#has_reservation}}
+		  resurved
+		{{/has_reservation}}
+		{{^has_reservation}}
+		  no resurvation
+		{{/has_reservation}}
+		</span>
+              </div>
+	    {{/has_has_reservation}}
           </li>
         {{/rides}}
     </ul>

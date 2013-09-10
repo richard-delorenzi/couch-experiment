@@ -18,8 +18,8 @@ function(head, req) {
 	for ( var i in stash)
 	{
 	    Result[i] = stash[i];
-	    Result["has_"+i] = typeof i;
-		//(typeof i == "undefined" ||stash[i]===null)?false:true;
+	    Result["has_"+i] = 
+		(typeof i == stash[i]===null)?false:true;
 	}
 	return Result;
     }
@@ -43,22 +43,29 @@ function(head, req) {
     function stash()
     {
 	var key = "";
+	var reservation = null;
 	// render the html head using a template
 	var stash = {
 	    rides : List.withRows(
 		function(row) {
-		    var ride = row.value;
+		    var value = row.value;
 		    key = row.key;
-		    var ride_stash = {
-			//has_wait_time_min : ride.wait_time_min ? true : false,
-			wait_time_min: ride.wait_time_min,
+		    if (value.type == "ride")
+		    {
+			var ride = value;
 			
-			//has_description: ride.description ? true : false,
-			description: listify(ride.description),
-			
-			name : ride.name
-		    };
-		    return addHas(ride_stash);
+			var ride_stash = {
+			    wait_time_min: ride.wait_time_min,
+			    description: listify(ride.description),
+			    name : ride.name,
+			    has_reservation : (reservation==ride._id)
+			};
+			reservation = null;
+			return addHas(ride_stash);
+		    } else {
+			reservation = value.attraction_id;
+			return false;
+		    }
 		})
 	};
 	return stash;
