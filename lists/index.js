@@ -12,13 +12,13 @@ function(head, req) {
     // The first matching format is sent, so reordering functions changes 
     // thier priority. In this case HTML is the preferred format, so it comes first.
 
-    function addHas(stash)
+    function addIfdef(stash)
     {
 	var Result=new Object();
 	for ( var i in stash)
 	{
 	    Result[i] = stash[i];
-	    Result["has_"+i] = 
+	    Result["ifdef_"+i] = 
 		(typeof i == stash[i]===null)?false:true;
 	}
 	return Result;
@@ -61,7 +61,7 @@ function(head, req) {
 			    has_reservation : (reservation==ride._id)
 			};
 			reservation = null;
-			return addHas(ride_stash);
+			return addIfdef(ride_stash);
 		    } else {
 			reservation = value.attraction_id;
 			return false;

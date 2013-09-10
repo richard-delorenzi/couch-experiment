@@ -12,7 +12,7 @@
         {{#rides}}
           <li>
             <h3>{{name}}</h3>
-            {{#has_description}}
+            {{#ifdef_description}}
               <div class="descriptions">
 		<ul>
                 {{#description}}
@@ -20,17 +20,17 @@
                 {{/description}}
 		</ul>
               </div>
-            {{/has_description}}
+            {{/ifdef_description}}
 
-	    {{#has_wait_time_min}}
+	    {{#ifdef_wait_time_min}}
             <div class="wait_time">
               {{#wait_time_min}}
                 <span>wait time is {{ wait_time_min }}</span> 
 	      {{/wait_time_min}}
             </div>
-	    {{/has_wait_time_min}}
+	    {{/ifdef_wait_time_min}}
 
-	    {{#has_has_reservation}}
+	    {{#ifdef_has_reservation}}
 	      <div class="reserved state">
 		<span>
 		{{#has_reservation}}
@@ -41,7 +41,7 @@
 		{{/has_reservation}}
 		</span>
               </div>
-	    {{/has_has_reservation}}
+	    {{/ifdef_has_reservation}}
           </li>
         {{/rides}}
     </ul>
