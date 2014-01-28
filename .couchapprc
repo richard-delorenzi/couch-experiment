@@ -5,6 +5,6 @@
     },
     "dev" : {
       "db" : "http://admin:password@localhost:5984/q-couch"
-    },
+    }
   }
 }
