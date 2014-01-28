@@ -12,6 +12,7 @@ function (newDoc, oldDoc, userCtx, secObj) {
     // admins or owner can always delete
     //if (v.isAdmin()) return true;
 
+    v.require("type");
     v.unchanged("type");
 
     if (newDoc.created_at) v.dateFormat("created_at");
