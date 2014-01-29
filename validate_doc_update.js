@@ -18,8 +18,8 @@ function (newDoc, oldDoc, userCtx, secObj) {
     if (newDoc.created_at) v.dateFormat("created_at");
     
     if (newDoc.type == "ride") {
-	v.require("name", "wait_time_min");
-	v.assert(isNumber(newDoc.wait_time_min), "wait time, not a number");
+	v.require("name");
+	//v.assert(isNumber(newDoc.wait_time_min), "wait time, not a number");
     }
     else if (newDoc.type = "zzzz") {
     }
