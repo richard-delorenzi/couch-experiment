@@ -3,8 +3,8 @@
     "default" : {
       "db" : "http://admin:password@localhost:5984/q-couch-clean"
     },
-    "dev" : {
-      "db" : "http://admin:password@localhost:5984/q-couch"
+    "test" : {
+      "db" : "http://admin:password@localhost:5984/q-couch-test"
     }
   }
 }

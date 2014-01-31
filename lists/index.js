@@ -16,8 +16,9 @@ function(head, req) {
 	for ( var i in stash)
 	{
 	    Result[i] = stash[i];
-	    Result["ifdef_"+i] = 
-		(typeof i == stash[i]===null)?false:true;
+	    if (typeof stash[i] != "undefined") {
+		Result["ifdef_"+i] = true; 
+	    }
 	}
 	return Result;
     }
@@ -59,7 +60,7 @@ function(head, req) {
 			if (has_reservation) {
 			    ride_stash.entry_time = s_entry_time;
 			} else {
-			    ride_stash.wait_time_min= ride.wait_time_min;
+			    ride_stash["wait_time_min"]= ride.wait_time_min;
 			}
 
 			s_reservation = null;
