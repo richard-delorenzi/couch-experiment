@@ -4,13 +4,11 @@ function(head, req) {
     var List = require("vendor/couchapp/lib/list");
     var path = require("vendor/couchapp/lib/path").init(req);
 
-    var indexPath = path.list('index','rides',{descending:true, limit:10});
+    //var indexPath = path.list('index','rides',{descending:true, limit:10});
 
 
-    var path_parts = req.path;
-    // The provides function serves the format the client requests.
-    // The first matching format is sent, so reordering functions changes 
-    // thier priority. In this case HTML is the preferred format, so it comes first.
+    //var path_parts = req.path;
+   
 
     function addIfdef(stash)
     {
@@ -44,7 +42,6 @@ function(head, req) {
     {
 	var key = "";
 	var s_reservation = null;
-	// render the html head using a template
 	var stash = {
 	    rides : List.withRows(
 		function(row) {
@@ -77,13 +74,15 @@ function(head, req) {
 	return stash;
     }
 
+    //-- The provides function serves the format the client requests.
+    //-- The first matching format is sent, so reordering functions changes 
+    //-- thier priority. In this case HTML is the preferred format, so it comes first.
+
     provides("html", function() {
 	return Mustache.to_html(ddoc.templates.index, stash(), ddoc.templates.partials);
     });
 
     provides("json", function() {
 	return JSON.stringify(stash());
-    });
-
-    
+    });   
 };
