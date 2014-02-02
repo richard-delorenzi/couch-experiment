@@ -41,19 +41,6 @@
 		</div>
               {{/ifdef_entry_time}}
 
-	      {{#ifdef_has_reservation}}
-		<div class="reserved state">
-		  <span>
-		    {{#has_reservation}}
-		      reserved 
-		    {{/has_reservation}}
-		    {{^has_reservation}}
-		      no reservation
-		    {{/has_reservation}}
-		  </span>
-		</div>
-	     {{/ifdef_has_reservation}}
-
             </li>
 	  {{/name}}
         {{/rides}}

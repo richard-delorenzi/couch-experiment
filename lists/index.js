@@ -42,7 +42,6 @@ function(head, req) {
     function stash()
     {
 	var key = "";
-	var s_reservation = null;
 	var stash = {
 	    rides : List.withRows(
 		function(row) {
@@ -50,23 +49,17 @@ function(head, req) {
 		    key = row.key;
 		    if (value.type == "ride")
 		    {
-			var ride = value;
-			var has_reservation = (s_reservation==ride._id)
+			var ride = value;	
 			var ride_stash = {
-			    has_reservation : has_reservation,
 			    description: listify(ride.description),
 			    name : ride.name,
 			};
-			if (has_reservation) {
-			    ride_stash.entry_time = s_entry_time;
-			} else {
-			    ride_stash["wait_time_min"]= ride.wait_time_min;
-			}
+		
+			ride_stash["wait_time_min"]= ride.wait_time_min;
+			
 
-			s_reservation = null;
 			return addIfdef(ride_stash);
 		    } else {
-			s_reservation = value.attraction_id;
 			s_entry_time = value.entry_time;
 			return false;
 		    }
