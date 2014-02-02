@@ -1,4 +1,4 @@
-function(head, req) {
+function (head, req) {
     var ddoc = this;
     var Mustache = require("lib/mustache");
     var List = require("vendor/couchapp/lib/list");
@@ -8,19 +8,53 @@ function(head, req) {
 
 
     //var path_parts = req.path;
-   
 
-    function addIfdef(stash)
-    {
-	var Result=new Object();
-	for ( var i in stash)
-	{
-	    Result[i] = stash[i];
-	    if (typeof stash[i] != "undefined") {
-		Result["ifdef_"+i] = true; 
-	    }
+    function assert(condition, message) {
+	if (!condition) {
+            throw message || "Assertion failed";
 	}
-	return Result;
+    }
+   
+    function addIfdef(stash) 
+    {
+	switch (typeof(stash))
+	{
+	case "undefined":
+	case "boolean":
+	case "number":
+	case "string":
+	    return stash;
+	case "function":
+	    return stash;
+	    
+	case "object":
+	    switch (Object.prototype.toString.call(stash))
+	    {
+	    case "[object Null]":
+		return stash;
+	    case "[object Object]":
+		var Result=new Object();
+		for ( var i in stash)
+		{
+		    if (typeof stash[i] != "undefined") {
+			Result["ifdef_"+i] = true; 
+		    }
+		    Result[i] = addIfdef(stash[i]);
+		}
+		return Result;
+	    case "[object Array]":
+		var Result=new Array();
+		for ( var i in stash)
+		{
+		    Result[i] =  addIfdef(stash[i]);
+		}
+		return Result;
+	    default:
+		assert(false,"not object or list:" + Object.prototype.toString.call(stash));
+	    }
+	default:
+	    assert(false,"unhandled type");
+	}
     }
 
     function listify(i)
@@ -37,6 +71,18 @@ function(head, req) {
 	else {
 	    return [i]
 	}
+    }
+
+    function zstash()
+    {
+	var key = "";
+	var stash = {
+	    "o" : { "e":"E", "f": { "g":"G" }},
+	    "z": [ "hello",
+	      { "a": "A", "b": "B"}
+	    ]
+	};
+	return  addIfdef( stash );
     }
 
     function stash()
