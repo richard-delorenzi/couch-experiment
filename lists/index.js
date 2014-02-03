@@ -3,87 +3,12 @@ function (head, req) {
     var Mustache = require("lib/mustache");
     var List = require("vendor/couchapp/lib/list");
     var path = require("vendor/couchapp/lib/path").init(req);
+    var myLib = require("lib/myLib");
 
     //var indexPath = path.list('index','rides',{descending:true, limit:10});
 
 
     //var path_parts = req.path;
-
-    function assert(condition, message) {
-	if (!condition) {
-            throw message || "Assertion failed";
-	}
-    }
-   
-    function addIfdef(stash) 
-    {
-	switch (typeof(stash))
-	{
-	case "undefined":
-	case "boolean":
-	case "number":
-	case "string":
-	    return stash;
-	case "function":
-	    return stash;
-	    
-	case "object":
-	    switch (Object.prototype.toString.call(stash))
-	    {
-	    case "[object Null]":
-		return stash;
-	    case "[object Object]":
-		var Result=new Object();
-		for ( var i in stash)
-		{
-		    if (typeof stash[i] != "undefined") {
-			Result["ifdef_"+i] = true; 
-		    }
-		    Result[i] = addIfdef(stash[i]);
-		}
-		return Result;
-	    case "[object Array]":
-		var Result=new Array();
-		for ( var i in stash)
-		{
-		    Result[i] =  addIfdef(stash[i]);
-		}
-		return Result;
-	    default:
-		assert(false,"not object or list:" + Object.prototype.toString.call(stash));
-	    }
-	default:
-	    assert(false,"unhandled type");
-	}
-    }
-
-    function listify(i)
-    {
-	if ( typeof i == "undefined" ) {
-	    return null;
-	}
-	else if (typeof i == "boolean") {
-	    return i?["true"]:["false"];
-	}
-	else if (Array.isArray(i)) {
-	    return i;
-	}
-	else {
-	    return [i]
-	}
-    }
-
-    function zstash()
-    {
-	var key = "";
-	var stash = {
-	    "o" : { "e":"E", "f": { "g":"G" }},
-	    "z": [ "hello",
-	      { "a": "A", "b": "B"}
-	    ]
-	};
-	return  addIfdef( stash );
-    }
 
     function stash()
     {
@@ -97,14 +22,14 @@ function (head, req) {
 		    {
 			var ride = value;	
 			var ride_stash = {
-			    description: listify(ride.description),
+			    description: myLib.listify(ride.description),
 			    name : ride.name,
 			};
 		
 			ride_stash["wait_time_min"]= ride.wait_time_min;
 			
 
-			return addIfdef(ride_stash);
+			return  myLib.addIfdef(ride_stash);
 		    } else {
 			s_entry_time = value.entry_time;
 			return false;
