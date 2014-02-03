@@ -1,1 +1,6 @@
-glob:*~
+style: regex
+
+#backup files
+.*~$
+.*[.]orig$
+/#[^/]*#$
