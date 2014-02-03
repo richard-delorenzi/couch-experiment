@@ -50,4 +50,22 @@ test( "listify", function() {
     deepEqual( listify(undefined), null);
 });
 
+test( "assert", function() {
+    expect(2);
+
+    try {
+	assert(false, "hello");
+	ok(false, "exception not thrown");
+    } catch(err) {
+	ok(true, "exception thrown");
+    }
+
+    try {
+	assert(true, "hello");
+	ok(true, "exception not thrown");
+    } catch(err){
+	ok(false, "exception thrown");
+    }
+});
+
 
