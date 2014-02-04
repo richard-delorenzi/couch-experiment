@@ -26,5 +26,9 @@
     { 
 	"from" : "",
 	"to" : "static-pages/index.html"
+    },
+    {
+	"from" : "rides",
+	"to" : "_list/rides/rides"
     }
 ]
