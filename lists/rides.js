@@ -44,7 +44,7 @@ function (head, req) {
     //-- thier priority. In this case HTML is the preferred format, so it comes first.
 
     provides("html", function() {
-	return Mustache.to_html(ddoc.templates.index, stash(), ddoc.templates.partials);
+	return Mustache.to_html(ddoc.templates.rides, stash(), ddoc.templates.partials);
     });
 
     provides("json", function() {
