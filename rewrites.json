@@ -30,5 +30,17 @@
     {
 	"from" : "rides",
 	"to" : "_list/rides/rides"
+    },
+    {
+	"from": "ride-id-by-name",
+	"to": "_view/ride-id-by-name"
+    },
+    {
+	"from": "doc/*",
+	"to":   "../../*"
+    },
+    {
+	"from": "db/*",
+	"to": "../../*"
     }
 ]
