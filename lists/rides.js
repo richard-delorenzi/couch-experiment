@@ -5,37 +5,29 @@ function (head, req) {
     var path = require("vendor/couchapp/lib/path").init(req);
     var myLib = require("lib/myLib");
 
-    //var indexPath = path.list('index','rides',{descending:true, limit:10});
-
-
-    //var path_parts = req.path;
-
     function stash()
     {
-	var key = "";
-	var stash = {
-	    rides : List.withRows(
-		function(row) {
-		    var value = row.value;
-		    key = row.key;
-		    if (value.type == "ride")
-		    {
-			var ride = value;	
-			var ride_stash = {
-			    description: myLib.listify(ride.description),
-			    name : ride.name,
-			};
-		
-			ride_stash["wait_time_min"]= ride.wait_time_min;
-			
+	var rides = new Array();
 
-			return  myLib.addIfdef(ride_stash);
-		    } else {
-			s_entry_time = value.entry_time;
-			return false;
-		    }
-		})
-	};
+	while (row = getRow() ) {
+	    var value = row.value;
+	    var key = row.key;
+
+	    if (value.type == "ride")
+	    {
+		var ride = value;	
+		var ride_stash = {
+		    description: myLib.listify(ride.description),
+		    name : ride.name
+		};
+		
+		rides.push(ride_stash);
+	    }
+	}
+
+
+
+	var stash = { "rides": rides };
 	return stash;
     }
 
@@ -44,7 +36,7 @@ function (head, req) {
     //-- thier priority. In this case HTML is the preferred format, so it comes first.
 
     provides("html", function() {
-	return Mustache.to_html(ddoc.templates.rides, stash(), ddoc.templates.partials);
+	return Mustache.to_html(ddoc.templates.rides,  myLib.addIfdef(stash()), ddoc.templates.partials);
     });
 
     provides("json", function() {
