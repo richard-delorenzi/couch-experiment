@@ -15,8 +15,6 @@ function (head, req) {
 	    var key = row.key;
 	    var subkey = key[1];
 
-	    ride_stash = new Object();
-
 	    if (value.type == "ride")
 	    {
 		var ride = value;	
@@ -24,8 +22,15 @@ function (head, req) {
 		ride_stash["name"] = ride.name;
 	    }
 
+	    if (value.type == "ride-status")
+	    {
+		var status = value;
+		ride_stash["wait_time_min"] = status.wait_time_min;
+	    }
+
 	    if (subkey == 0) {
 		rides.push(ride_stash);
+		ride_stash = new Object();
 	    }
 	}
 
