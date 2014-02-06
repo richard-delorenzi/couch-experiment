@@ -8,24 +8,26 @@ function (head, req) {
     function stash()
     {
 	var rides = new Array();
+	var ride_stash = new Object();
 
 	while (row = getRow() ) {
 	    var value = row.value;
 	    var key = row.key;
+	    var subkey = key[1];
+
+	    ride_stash = new Object();
 
 	    if (value.type == "ride")
 	    {
 		var ride = value;	
-		var ride_stash = {
-		    description: myLib.listify(ride.description),
-		    name : ride.name
-		};
-		
+		ride_stash["description"] = myLib.listify(ride.description);
+		ride_stash["name"] = ride.name;
+	    }
+
+	    if (subkey == 0) {
 		rides.push(ride_stash);
 	    }
 	}
-
-
 
 	var stash = { "rides": rides };
 	return stash;
