@@ -29,7 +29,12 @@
     },
     {
 	"from" : "rides",
-	"to" : "_list/rides/rides"
+	"to" : "_list/rides/rides",
+	"query": { "summary" : "true" }
+    },
+    {
+	"from" : "ridedetails/",
+	"to"   : "_list/rides/rides"
     },
     {
 	"from": "ride-id-by-name",

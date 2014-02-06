@@ -9,11 +9,17 @@ function (head, req) {
     {
 	var rides = new Array();
 	var ride_stash = new Object();
+	var prevkey = null;
 
 	while (row = getRow() ) {
 	    var value = row.value;
 	    var key = row.key;
-	    var subkey = key[1];
+
+	    if (key != prevkey && prevkey != null) {
+		rides.push(ride_stash);
+		ride_stash = new Object();
+	    }
+	    prevkey=key;
 
 	    if (value.type == "ride")
 	    {
@@ -27,12 +33,8 @@ function (head, req) {
 		var status = value;
 		ride_stash["wait_time_min"] = status.wait_time_min;
 	    }
-
-	    if (subkey == 0) {
-		rides.push(ride_stash);
-		ride_stash = new Object();
-	    }
 	}
+	rides.push(ride_stash);
 
 	var stash = { "rides": rides };
 	return stash;
@@ -43,10 +45,14 @@ function (head, req) {
     //-- thier priority. In this case HTML is the preferred format, so it comes first.
 
     provides("html", function() {
-	return Mustache.to_html(ddoc.templates.rides,  myLib.addIfdef(stash()), ddoc.templates.partials);
+	var isSummary = req.query["summary"] != null;
+	var template = isSummary?"rides-summary":"rides";
+
+	return Mustache.to_html(ddoc.templates[template],  myLib.addIfdef(stash()), ddoc.templates.partials);
     });
 
     provides("json", function() {
+//	return JSON.stringify(req.query);
 	return JSON.stringify(stash());
     });   
 };
