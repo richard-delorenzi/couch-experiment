@@ -19,13 +19,13 @@
 	"from" : "vendor/*",
 	"to" : "vendor/*"
     },
-    {
-	"from" : ":db/*",
-	"to" : "../../*"
-    },
     { 
-	"from" : "",
+	"from" : "index.html",
 	"to" : "static-pages/index.html"
+    },
+    {
+	"from" : "",
+	"to"   : "_rewrite/index.html" 
     },
     {
 	"from" : "rides",
@@ -33,7 +33,7 @@
 	"query": { "summary" : "true" }
     },
     {
-	"from" : "ridedetails/",
+	"from" : "ridedetails/:key",
 	"to"   : "_list/rides/rides"
     },
     {
