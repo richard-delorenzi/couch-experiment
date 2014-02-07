@@ -38,7 +38,7 @@
     },
     {
 	"from": "ride-id-by-name",
-	"to": "_view/ride-id-by-name"
+	"to": "_view/ride-by-name"
     },
     {
 	"from": "doc/*",
