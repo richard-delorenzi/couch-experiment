@@ -21,9 +21,4 @@ function (newDoc, oldDoc, userCtx, secObj) {
 	v.require("name");
 	//v.assert(isNumber(newDoc.wait_time_min), "wait time, not a number");
     }
-    else if (newDoc.type = "zzzz") {
-    }
-    else {
-	v.assert(false, "invalid doc type");
-    }
 }

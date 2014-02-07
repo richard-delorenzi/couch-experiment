@@ -21,12 +21,18 @@
                 {{#ifdef_id}}
 		  </a>
                 {{/ifdef_id}}
-              </th>  
+              </th>
+
+	      {{#ifdef_state}}
+		<td class="state">
+                  <span>{{state}}</span> 
+		</td>
+              {{/ifdef_state}}
 
 	      {{#ifdef_wait_time_min}}
 		<td class="wait_time">
 		  {{#wait_time_min}}
-                    <span>wait time is {{ wait_time_min }} minutes</span> 
+                    <span>Queue length {{ wait_time_min }} minutes</span> 
 		  {{/wait_time_min}}
 		</td>
               {{/ifdef_wait_time_min}}
