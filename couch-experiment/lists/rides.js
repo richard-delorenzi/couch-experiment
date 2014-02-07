@@ -35,6 +35,9 @@ function (head, req) {
 		var status = value;
 		ride_stash["wait_time_min"] = status.wait_time_min;
 		ride_stash["state"] = status.state;
+		ride_stash["wait_time_gold"]= status.wait_time_min*5/100;
+		ride_stash["wait_time_silver"]= status.wait_time_min*50/100;
+		ride_stash["wait_time_bronze"]= status.wait_time_min*100/100;
 	    }
 	}
 	rides.push(ride_stash);
