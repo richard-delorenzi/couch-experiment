@@ -7,33 +7,30 @@
     
     <div id="content">
       <h1>Rides</h1>
-      <ul id="rides">
+      <table id="rides">
         {{#rides}}
 
 	  {{#name}}{{!test is real record, not artefact of processing (false)}}
-            <li>
+            <tr>
 
-	      <h3>{{name}}</h3>  
+	      <th>{{name}}</th>  
 
 	      {{#ifdef_wait_time_min}}
-		<div class="wait_time">
+		<td class="wait_time">
 		  {{#wait_time_min}}
                     <span>wait time is {{ wait_time_min }} minutes</span> 
 		  {{/wait_time_min}}
-		</div>
+		</td>
               {{/ifdef_wait_time_min}}
-	      {{#ifdef_entry_time}}
-		<div class="entry_time">
-		  {{#entry_time}}
-                    <span>entry time is {{ entry_time }}</span> 
-		  {{/entry_time}}
-		</div>
-              {{/ifdef_entry_time}}
 
-            </li>
+              {{#ifdef_id}}
+		<td><a href="ridedetails/{{id}}">details</a></td>
+              {{/ifdef_id}}
+	    
+            </tr>
 	  {{/name}}
         {{/rides}}
-      </ul>
+      </table>
     </div>
   </body>
   {{>scripts}}

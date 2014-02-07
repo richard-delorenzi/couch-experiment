@@ -13,7 +13,8 @@ function (head, req) {
 
 	while (row = getRow() ) {
 	    var value = row.value;
-	    var key = row.key;
+	    var key   = row.key;
+	    var id    = row.id;
 
 	    if (key != prevkey && prevkey != null) {
 		rides.push(ride_stash);
@@ -26,6 +27,7 @@ function (head, req) {
 		var ride = value;	
 		ride_stash["description"] = myLib.listify(ride.description);
 		ride_stash["name"] = ride.name;
+		ride_stash["id"] = id;
 	    }
 
 	    if (value.type == "ride-status")
