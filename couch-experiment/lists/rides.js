@@ -34,6 +34,7 @@ function (head, req) {
 	    {
 		var status = value;
 		ride_stash["wait_time_min"] = status.wait_time_min;
+		ride_stash["state"] = status.state;
 	    }
 	}
 	rides.push(ride_stash);
