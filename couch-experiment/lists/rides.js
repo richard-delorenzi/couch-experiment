@@ -27,7 +27,7 @@ function (head, req) {
 	    var key   = row.key;
 	    var id    = row.id;
 
-	    if (key != prevkey && prevkey != null) {
+	    if ( prevkey != null && key[1] != prevkey[1]) {
 		rides_push();
 	    }
 	    prevkey=key;
