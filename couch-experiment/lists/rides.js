@@ -64,7 +64,7 @@ function (head, req) {
 
     provides("html", function() {
 	var isSummary = req.query["summary"] != null;
-	var template = isSummary?"rides-summary":"rides";
+	var template = isSummary?"rides-summary":"ride";
 
 	return Mustache.to_html(ddoc.templates[template],  myLib.addIfdef(stash()), ddoc.templates.partials);
     });
