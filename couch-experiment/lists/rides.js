@@ -5,6 +5,10 @@ function (head, req) {
     var path = require("vendor/couchapp/lib/path").init(req);
     var myLib = require("lib/myLib");
 
+    //:sub-optimal: filtering on ridename here is sub-optimal, as all ride pages will be recalculated. 
+    //If any ride changes.
+    var requestedRideName=req.query["rideName"];
+
     function stash()
     {
 	var rides = new Array();
@@ -12,7 +16,9 @@ function (head, req) {
 	var prevkey = null;
 
 	function rides_push(){
-	    rides.push(ride_stash);
+	    if (requestedRideName == null || requestedRideName == ride_stash.name) {
+		rides.push(ride_stash);
+	    }
 	    ride_stash = new Object();
 	}
 

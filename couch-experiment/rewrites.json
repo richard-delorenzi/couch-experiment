@@ -33,7 +33,7 @@
 	"query": { "summary" : "true" }
     },
     {
-	"from" : "ridedetails/:key",
+	"from" : "ridedetails/:rideName",
 	"to"   : "_list/rides/rides"
     },
     {
