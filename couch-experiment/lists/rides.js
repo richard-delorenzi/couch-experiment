@@ -11,14 +11,18 @@ function (head, req) {
 	var ride_stash = new Object();
 	var prevkey = null;
 
+	function rides_push(){
+	    rides.push(ride_stash);
+	    ride_stash = new Object();
+	}
+
 	while (row = getRow() ) {
 	    var value = row.value;
 	    var key   = row.key;
 	    var id    = row.id;
 
 	    if (key != prevkey && prevkey != null) {
-		rides.push(ride_stash);
-		ride_stash = new Object();
+		rides_push();
 	    }
 	    prevkey=key;
 
@@ -42,7 +46,7 @@ function (head, req) {
 		];
 	    }
 	}
-	rides.push(ride_stash);
+	rides_push();
 
 	var stash = { "rides": rides };
 	return stash;
@@ -60,7 +64,7 @@ function (head, req) {
     });
 
     provides("json", function() {
-//	return JSON.stringify(req.query);
+	//return JSON.stringify(req);
 	return JSON.stringify(stash());
     });   
 };
