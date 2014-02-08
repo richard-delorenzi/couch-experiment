@@ -31,27 +31,15 @@
 
 	      {{#ifdef_wait_time_min}}
 		<td class="wait_time">
-                    <span>Queue length {{ wait_time_min }} minutes</span> 
+                    <span>Wait times are
+		      {{#wait_time_min}}
+		        {{name}}: {{value}}
+		      {{/wait_time_min}}
+		      minutes</span> 
 		</td>
               {{/ifdef_wait_time_min}}
 
-              {{#ifdef_wait_time_gold}}
-	        <td class="wait_time">	 
-                    <span>{{ wait_time_gold }}</span>  
-		</td>
-              {{/ifdef_wait_time_gold}}
-
-              {{#ifdef_wait_time_silver}}
-	        <td class="wait_time">	 
-                    <span>{{ wait_time_silver }}</span>  
-		</td>
-              {{/ifdef_wait_time_silver}}
-
-              {{#ifdef_wait_time_bronze}}
-	        <td class="wait_time">	 
-                    <span>{{ wait_time_bronze }}</span>  
-		</td>
-              {{/ifdef_wait_time_bronze}}
+             
 	    
             </tr>
 	  {{/name}}

@@ -33,11 +33,13 @@ function (head, req) {
 	    if (value.type == "ride-status")
 	    {
 		var status = value;
-		ride_stash["wait_time_min"] = status.wait_time_min;
-		ride_stash["state"] = status.state;
-		ride_stash["wait_time_gold"]= status.wait_time_min*5/100;
-		ride_stash["wait_time_silver"]= status.wait_time_min*50/100;
-		ride_stash["wait_time_bronze"]= status.wait_time_min*100/100;
+		ride_stash["state"] = status.state;		
+
+		ride_stash["wait_time_min"]= [
+		    {"value":   status.wait_time_min*5/100, "name": "gold"},
+		    {"value": status.wait_time_min*50/100,  "name": "silver"},
+		    {"value": status.wait_time_min*100/100, "name": "bronze"}
+		];
 	    }
 	}
 	rides.push(ride_stash);
