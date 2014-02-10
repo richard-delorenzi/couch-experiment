@@ -65,39 +65,41 @@ function (head, req) {
 	function process(row){
 	    var key = (row==null)?null:row.key;
 
-	    if ( prevkey != null && key[1] != prevkey[1]) {
+	    if ( key==null || prevkey!=null && key[1]!=prevkey[1] ){
 		rides_push();
 	    }
 	    prevkey=key;
 
-	    var value = row.value;
-	    var id    = row.id;
+	    if (row!=null){
+		var value = row.value;
+		var id    = row.id;
+		
+		if (value.type == "ride")
+		{
+		    var ride = value;	
+		    ride_stash["description"] = myLib.listify(ride.description);
+		    ride_stash["name"] = ride.name;
+		    ride_stash["id"] = id;
+		}
 
-	    if (value.type == "ride")
-	    {
-		var ride = value;	
-		ride_stash["description"] = myLib.listify(ride.description);
-		ride_stash["name"] = ride.name;
-		ride_stash["id"] = id;
-	    }
-
-	    if (value.type == "ride_status")
-	    {
-		var status = value;
-		ride_stash["state"] = status.state;		
-
-		ride_stash["wait_time_min"]= [
-		    {"value":   status.wait_time_min*5/100, "name": "gold"},
-		    {"value": status.wait_time_min*50/100,  "name": "silver"},
-		    {"value": status.wait_time_min*100/100, "name": "bronze"}
-		];
+		if (value.type == "ride_status")
+		{
+		    var status = value;
+		    ride_stash["state"] = status.state;		
+		    
+		    ride_stash["wait_time_min"]= [
+			{"value":   status.wait_time_min*5/100, "name": "gold"},
+			{"value": status.wait_time_min*50/100,  "name": "silver"},
+			{"value": status.wait_time_min*100/100, "name": "bronze"}
+		    ];
+		}
 	    }
 	}
 
 	while (row = getRow() ) {
 	    process(row);
 	}
-	rides_push();
+	process(null);
 
 	var stash = { "rides": rides };
 	return stash;
