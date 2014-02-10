@@ -23,18 +23,14 @@ function (head, req) {
 	    ride_stash = new Object();
 	}
 
-	function processRides(row){
-	    var key = (row==null)?null:row.key;
+	function processRides(key, id, value){
 
-	    if ( key==null || prevkey!=null && key[1]!=prevkey[1] ){
+	    if ( key==null || prevkey!=null && key!=prevkey ){
 		rides_push();
 	    }
 	    prevkey=key;
 
-	    if (row!=null){
-		var value = row.value;
-		var id    = row.id;
-		
+	    if (value!=null){
 		if (value.type == "ride")
 		{
 		    var ride = value;	
@@ -57,8 +53,22 @@ function (head, req) {
 	    }
 	}
 
+	function noProcess(key, id, value){}
+
+	var prevMethod=noProcess;
 	function process(row){
-	    processRides(row);
+	    if (row!=null){	   
+		var method = 
+		    row.key[0]==0 ? noProcess :
+		    row.key[0]==1 ? processRides :
+		    null;
+		myLib.assert( method!=null );
+		
+		method(row.key[1], row.id, row.value);
+		prevMethod=method;
+	    }else{
+		prevMethod(null,null,null);
+	    }
 	}
 
 	function mainLoop(){
