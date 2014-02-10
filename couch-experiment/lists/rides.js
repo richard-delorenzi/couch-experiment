@@ -12,6 +12,11 @@ function (head, req) {
 //-----------------------------------------------------------------------------------------
     function stash()
     {
+	var wait_time_modifiers = new Array();
+	function preProcess(key, id, value){
+	    wait_time_modifiers.push(value);
+	}
+
 	var rides = new Array();
 	var ride_stash = new Object();
 	var prevkey = null;
@@ -44,11 +49,15 @@ function (head, req) {
 		    var status = value;
 		    ride_stash["state"] = status.state;		
 		    
-		    ride_stash["wait_time_min"]= [
-			{"value":   status.wait_time_min*5/100, "name": "gold"},
-			{"value": status.wait_time_min*50/100,  "name": "silver"},
-			{"value": status.wait_time_min*100/100, "name": "bronze"}
-		    ];
+		    wait_times= new Array();
+		    for ( i in wait_time_modifiers )
+		    {
+			s=new Object();
+			s["value"]= status.wait_time_min*wait_time_modifiers[i].percentage/100;
+			s["name"] = wait_time_modifiers[i].name;
+			wait_times.push(s);
+		    }
+		    ride_stash["wait_time_min"]=wait_times;
 		}
 	    }
 	}
@@ -59,7 +68,7 @@ function (head, req) {
 	function process(row){
 	    if (row!=null){	   
 		var method = 
-		    row.key[0]==0 ? noProcess :
+		    row.key[0]==0 ? preProcess :
 		    row.key[0]==1 ? processRides :
 		    null;
 		myLib.assert( method!=null );
@@ -80,7 +89,7 @@ function (head, req) {
 
 	mainLoop();
 
-	var stash = { "rides": rides };
+	var stash = { "rides": rides, "wait_time_modifiers": wait_time_modifiers };
 	return stash;
     }
 

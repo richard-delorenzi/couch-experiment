@@ -1,6 +1,6 @@
 function(doc) {  
     if (doc.type == "wait_time_modifier" ) {
-	emit([0], doc);
+	emit([0, doc.percentage], doc);
     }
 
     if (doc.type == "ride") {
