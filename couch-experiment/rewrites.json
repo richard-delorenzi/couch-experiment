@@ -41,6 +41,10 @@
 	"to": "_view/ride-by-name"
     },
     {
+	"form":"wait-time-modifier-view",
+	"to": "_view/wait-time-modifiers"
+    },
+    {
 	"from": "doc/*",
 	"to":   "../../*"
     },
