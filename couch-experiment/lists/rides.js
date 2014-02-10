@@ -9,9 +9,6 @@ function (head, req) {
     //If any ride changes.
     var requestedRideName=req.query["rideName"];
 
-
-    
-
     function zzz(methods)
     {
 	var prevphase=0;
@@ -35,8 +32,23 @@ function (head, req) {
 	}
     }
 
+//-----------------------------------------------------------------------------------------
+    //class processor
+    function processor(){
+	
+    }
+
+    processor.prototype.rides_push = function(){
+	if (requestedRideName == null || requestedRideName == ride_stash.name) {
+	    rides.push(ride_stash);
+	}
+	ride_stash = new Object();
+    };
+
+    
 
 
+//-----------------------------------------------------------------------------------------
     function stash()
     {
 	var rides = new Array();
@@ -50,15 +62,16 @@ function (head, req) {
 	    ride_stash = new Object();
 	}
 
-	while (row = getRow() ) {
-	    var value = row.value;
-	    var key   = row.key;
-	    var id    = row.id;
+	function process(row){
+	    var key = (row==null)?null:row.key;
 
 	    if ( prevkey != null && key[1] != prevkey[1]) {
 		rides_push();
 	    }
 	    prevkey=key;
+
+	    var value = row.value;
+	    var id    = row.id;
 
 	    if (value.type == "ride")
 	    {
@@ -79,6 +92,10 @@ function (head, req) {
 		    {"value": status.wait_time_min*100/100, "name": "bronze"}
 		];
 	    }
+	}
+
+	while (row = getRow() ) {
+	    process(row);
 	}
 	rides_push();
 
