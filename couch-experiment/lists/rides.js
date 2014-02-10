@@ -9,6 +9,34 @@ function (head, req) {
     //If any ride changes.
     var requestedRideName=req.query["rideName"];
 
+
+    
+
+    function zzz(methods)
+    {
+	var prevphase=0;
+	while (row = getRow() ) {
+	    var value = row.value;
+	    var id    = row.id;
+	    var key   = key.row;
+	    var phase = key[0];
+
+	    if ( prevphase != null && phase != prevphase) {
+		if ( finish in methods[prevphase] ) {
+		    methods[prevphase].finish();
+		}
+	    }
+	    prevphase=phase;
+
+	    methods[phase].act();
+	}
+	if ( finish in methods[prevphase] ) {
+	    methods[prevphase].finish();
+	}
+    }
+
+
+
     function stash()
     {
 	var rides = new Array();
