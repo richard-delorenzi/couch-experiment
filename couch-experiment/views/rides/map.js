@@ -1,8 +1,12 @@
 function(doc) {  
+    if (doc.type == "wait_time_modifier" ) {
+	emit([0], doc);
+    }
+
     if (doc.type == "ride") {
-	emit([0,doc._id], doc);
+	emit([1, doc._id], doc);
     }
     if (doc.type == "ride_status" ) {
-	emit([0,doc.attraction_id], doc);
+	emit([1, doc.attraction_id], doc);
     }
 };
