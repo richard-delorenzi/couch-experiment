@@ -5,5 +5,4 @@ function(doc) {
     if (doc.type == "ride_status" ) {
 	emit([0,doc.attraction_id], doc);
     }
-   
 };
