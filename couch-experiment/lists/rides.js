@@ -96,10 +96,14 @@ function (head, req) {
 	    }
 	}
 
-	while (row = getRow() ) {
-	    process(row);
+	function mainLoop(){
+	    while (row = getRow() ) {
+		process(row);
+	    }
+	    process(null);
 	}
-	process(null);
+
+	mainLoop();
 
 	var stash = { "rides": rides };
 	return stash;
