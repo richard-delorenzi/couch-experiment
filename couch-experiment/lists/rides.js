@@ -9,45 +9,6 @@ function (head, req) {
     //If any ride changes.
     var requestedRideName=req.query["rideName"];
 
-    function zzz(methods)
-    {
-	var prevphase=0;
-	while (row = getRow() ) {
-	    var value = row.value;
-	    var id    = row.id;
-	    var key   = key.row;
-	    var phase = key[0];
-
-	    if ( prevphase != null && phase != prevphase) {
-		if ( finish in methods[prevphase] ) {
-		    methods[prevphase].finish();
-		}
-	    }
-	    prevphase=phase;
-
-	    methods[phase].act();
-	}
-	if ( finish in methods[prevphase] ) {
-	    methods[prevphase].finish();
-	}
-    }
-
-//-----------------------------------------------------------------------------------------
-    //class processor
-    function processor(){
-	
-    }
-
-    processor.prototype.rides_push = function(){
-	if (requestedRideName == null || requestedRideName == ride_stash.name) {
-	    rides.push(ride_stash);
-	}
-	ride_stash = new Object();
-    };
-
-    
-
-
 //-----------------------------------------------------------------------------------------
     function stash()
     {
@@ -62,7 +23,7 @@ function (head, req) {
 	    ride_stash = new Object();
 	}
 
-	function process(row){
+	function processRides(row){
 	    var key = (row==null)?null:row.key;
 
 	    if ( key==null || prevkey!=null && key[1]!=prevkey[1] ){
@@ -94,6 +55,10 @@ function (head, req) {
 		    ];
 		}
 	    }
+	}
+
+	function process(row){
+	    processRides(row);
 	}
 
 	function mainLoop(){
