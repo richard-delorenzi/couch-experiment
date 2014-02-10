@@ -16,9 +16,38 @@ function (newDoc, oldDoc, userCtx, secObj) {
     v.unchanged("type");
 
     if (newDoc.created_at) v.dateFormat("created_at");
+
+    v.assert( newDoc.type == "ride"               ||
+	      newDoc.type == "ride_status"        ||
+	      newDoc.type == "wait_time_modifier" );
     
-    if (newDoc.type == "ride") {
+    switch (newDoc.type)
+    {
+    case "ride":
+    case "wait_time_modifier":
 	v.require("name");
-	//v.assert(isNumber(newDoc.wait_time_min), "wait time, not a number");
+	break;
+    case "ride_status":
+	v.require("attraction_id");
+	break;
     }
+
+    if (newDoc.type == "ride" ||
+	newDoc.type == "wait_time_modifier" ) 
+    {
+	v.require("name");
+    }
+
+    if (newDoc.type == "ride") {
+    }
+
+    if (newDoc.type == "ride_status") {
+
+    }
+
+    if (newDoc.type == "wait_time_modifier") {
+
+    }
+
+    
 }

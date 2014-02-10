@@ -68,7 +68,7 @@ function (head, req) {
 		ride_stash["id"] = id;
 	    }
 
-	    if (value.type == "ride-status")
+	    if (value.type == "ride_status")
 	    {
 		var status = value;
 		ride_stash["state"] = status.state;		
