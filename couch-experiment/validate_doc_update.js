@@ -46,7 +46,7 @@ function (newDoc, oldDoc, userCtx, secObj) {
     }
 
     if (newDoc.type == "wait_time_modifier") {
-
+	v.require("percentage");
     }
 
     
